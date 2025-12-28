@@ -1,6 +1,6 @@
 module github.com/akhildatla/dasm
 
-go 1.22
+go 1.23.0
 
 require (
 	github.com/rocketlaunchr/dataframe-go v0.0.0-20211025052708-a1030444159b
@@ -22,9 +22,9 @@ require (
 	github.com/olekukonko/tablewriter v0.0.4 // indirect
 	github.com/rocketlaunchr/mysql-go v1.1.3 // indirect
 	github.com/xitongsys/parquet-go v1.5.2 // indirect
-	golang.org/x/crypto v0.9.0 // indirect
+	golang.org/x/crypto v0.36.0 // indirect
 	golang.org/x/exp v0.0.0-20200331195152-e8c3332aa8e5 // indirect
-	golang.org/x/net v0.10.0 // indirect
+	golang.org/x/net v0.38.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
