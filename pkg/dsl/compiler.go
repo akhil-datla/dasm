@@ -80,10 +80,8 @@ func (c *Compiler) compileReturn(stmt *ReturnStmt) error {
 	case "F":
 		c.emit("HALT_F        F%d", reg.regNum)
 	case "V":
-		// Reduce to scalar first
-		fReg := c.allocFReg()
-		c.emit("REDUCE_SUM_F  F%d, V%d", fReg, reg.regNum)
-		c.emit("HALT_F        F%d", fReg)
+		// Return the vector directly using HALT_V
+		c.emit("HALT_V        V%d", reg.regNum)
 	}
 
 	return nil

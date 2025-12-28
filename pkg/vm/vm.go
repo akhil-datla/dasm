@@ -720,6 +720,14 @@ func (vm *VM) Execute() (any, error) {
 			}
 			return vm.registers.F[dst], nil
 
+		case OpHaltV:
+			dst := inst.Dst()
+			if vm.statsEnabled {
+				vm.stats.ExecutionTimeNs = time.Since(startTime).Nanoseconds()
+				vm.stats.FramesLoaded = len(vm.frames)
+			}
+			return vm.registers.V[dst], nil
+
 		default:
 			return nil, fmt.Errorf("%w: opcode 0x%02X", ErrInvalidInstruction, op)
 		}

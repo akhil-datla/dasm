@@ -154,7 +154,7 @@ func (c *Compiler) compileInstruction(inst AsmInstruction) (vm.Instruction, erro
 	case vm.OpNop:
 		return vm.EncodeInstruction(opcode, 0, 0, 0, 0, 0), nil
 
-	case vm.OpHalt, vm.OpHaltF:
+	case vm.OpHalt, vm.OpHaltF, vm.OpHaltV:
 		return c.compileSingleRegOp(opcode, inst)
 
 	default:

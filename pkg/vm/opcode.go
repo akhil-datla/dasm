@@ -99,6 +99,7 @@ const (
 
 	// ===== Control Flow (0xF0-0xFF) =====
 	OpNop   Opcode = 0xF0 // No operation
+	OpHaltV Opcode = 0xFD // Stop execution, V[dst] is return value (vector/column)
 	OpHalt  Opcode = 0xFE // Stop execution, R[dst] is return value (int64)
 	OpHaltF Opcode = 0xFF // Stop execution, F[dst] is return value (float64)
 )
@@ -273,6 +274,8 @@ func (o Opcode) String() string {
 	// Control Flow
 	case OpNop:
 		return "NOP"
+	case OpHaltV:
+		return "HALT_V"
 	case OpHalt:
 		return "HALT"
 	case OpHaltF:
@@ -453,6 +456,8 @@ func OpcodeFromString(s string) (Opcode, bool) {
 	// Control Flow
 	case "NOP":
 		return OpNop, true
+	case "HALT_V":
+		return OpHaltV, true
 	case "HALT":
 		return OpHalt, true
 	case "HALT_F":

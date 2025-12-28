@@ -887,8 +887,8 @@ func TestOpcodeString_AllCases(t *testing.T) {
 		})
 	}
 
-	// Test unknown opcode (use 0xFD which is not assigned)
-	unknown := Opcode(0xFD)
+	// Test unknown opcode (use 0xFC which is not assigned)
+	unknown := Opcode(0xFC)
 	if got := unknown.String(); got != "UNKNOWN" {
 		t.Errorf("unknown opcode String() = %q, want %q", got, "UNKNOWN")
 	}

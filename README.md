@@ -307,8 +307,9 @@ DIV_R         R0, R1, R2          ; Divide integers
 #### Control Flow
 ```asm
 NOP                               ; No operation
-HALT          R0                  ; Stop, return R0
-HALT_F        F0                  ; Stop, return F0
+HALT          R0                  ; Stop, return R0 (integer)
+HALT_F        F0                  ; Stop, return F0 (float)
+HALT_V        V0                  ; Stop, return V0 (vector/column)
 ```
 
 ## High-Level DSL
@@ -680,6 +681,19 @@ LOAD_PARQUET  R0, "data.parquet"
 SELECT_COL    V0, R0, "amount"
 REDUCE_MEAN   F0, V0
 HALT_F        F0
+```
+
+### Return a Vector (Column)
+
+```asm
+; Return filtered prices as a vector
+LOAD_FRAME    R0, "sales"
+SELECT_COL    V0, R0, "price"
+LOAD_CONST_F  F0, 50.0
+BROADCAST_F   V1, F0, V0
+CMP_GT        V2, V0, V1          ; price > 50
+FILTER        V3, V0, V2          ; filtered prices
+HALT_V        V3                  ; return the vector
 ```
 
 ### Building a Result Frame
