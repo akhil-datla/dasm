@@ -60,7 +60,7 @@ changelog:
 
 release:
   github:
-    owner: akhildatla
+    owner: akhil-datla
     name: dasm
   draft: false
   prerelease: auto
