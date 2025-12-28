@@ -1,0 +1,22 @@
+; Perform multiple aggregations per group
+; Demonstrates GROUP_COUNT, GROUP_SUM on same grouping
+;
+; Uses "sales" example frame with columns: category, amount
+
+LOAD_FRAME    R0, "sales"
+SELECT_COL    V0, R0, "category"
+SELECT_COL    V1, R0, "amount"
+
+; Create grouping
+GROUP_BY      R1, V0
+
+; Get unique category keys
+GROUP_KEYS    V2, R1
+
+; Calculate aggregations per group
+GROUP_COUNT   V3, R1              ; count per category
+GROUP_SUM     V4, R1, V1          ; sum per category (integer)
+
+; Sum of all group totals
+REDUCE_SUM    R2, V4
+HALT          R2

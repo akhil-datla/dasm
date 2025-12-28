@@ -1,0 +1,9 @@
+; Calculate discounted prices (price * 0.9), then sum
+; Use with: dasm run -example-frames computed_column.dasm
+LOAD_FRAME    R0, "products"
+SELECT_COL    V0, R0, "price"
+LOAD_CONST_F  F1, 0.9
+BROADCAST_F   V1, F1, V0
+VEC_MUL_F     V2, V0, V1          ; discounted = price * 0.9
+REDUCE_SUM_F  F0, V2
+HALT_F        F0

@@ -1,0 +1,9 @@
+; GroupBy and aggregate: sum sales by category
+; Uses predeclared frame "sales" with columns: category, amount
+LOAD_FRAME    R0, "sales"
+SELECT_COL    V0, R0, "category"
+SELECT_COL    V1, R0, "amount"
+GROUP_BY      R1, V0              ; R1 = groupby result
+GROUP_SUM     V2, R1, V1          ; V2 = sum of amount per category
+REDUCE_SUM    R2, V2              ; R2 = total of all sums (verification)
+HALT          R2

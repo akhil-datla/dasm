@@ -1,0 +1,9 @@
+; String operations: filter names containing "son"
+; Uses predeclared frame "people" with columns: name, age
+LOAD_FRAME    R0, "people"
+SELECT_COL    V0, R0, "name"
+SELECT_COL    V1, R0, "age"
+STR_CONTAINS  V2, V0, "son"       ; V2 = name contains "son"
+FILTER        V3, V1, V2          ; V3 = ages where name contains "son"
+REDUCE_COUNT  R1, V2              ; R1 = count of matching names
+HALT          R1

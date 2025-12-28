@@ -1,0 +1,18 @@
+; Demonstrate scalar register arithmetic
+; Calculates: (10 + 20) * 3 / 2
+
+LOAD_CONST    R0, 10
+LOAD_CONST    R1, 20
+LOAD_CONST    R2, 3
+LOAD_CONST    R3, 2
+
+; R4 = R0 + R1 = 30
+ADD_R         R4, R0, R1
+
+; R5 = R4 * R2 = 90
+MUL_R         R5, R4, R2
+
+; R6 = R5 / R3 = 45
+DIV_R         R6, R5, R3
+
+HALT          R6

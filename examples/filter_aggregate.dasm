@@ -1,0 +1,10 @@
+; Calculate average order amount where amount > 150
+; Use with: dasm run -example-frames filter_aggregate.dasm
+LOAD_FRAME    R0, "orders"
+SELECT_COL    V0, R0, "amount"
+LOAD_CONST_F  F1, 150.0
+BROADCAST_F   V1, F1, V0
+CMP_GT        V2, V0, V1          ; amount > 150
+FILTER        V3, V0, V2          ; filter amounts
+REDUCE_MEAN   F0, V3              ; average of filtered
+HALT_F        F0

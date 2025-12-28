@@ -1,0 +1,27 @@
+; Complete data pipeline example
+; 1. Load orders and customers
+; 2. Join them
+; 3. Filter high-value orders
+; 4. Sum total amounts
+;
+; Uses example frames:
+; - orders: order_id, customer_id, amount
+; - customers: customer_id, name
+
+; Step 1: Load data
+LOAD_FRAME    R0, "orders"
+LOAD_FRAME    R1, "customers"
+
+; Step 2: Join orders with customers
+JOIN_INNER    R2, R0, R1, "customer_id"
+
+; Step 3: Select amount column and filter > 100
+SELECT_COL    V0, R2, "amount"
+LOAD_CONST_F  F0, 100.0
+BROADCAST_F   V1, F0, V0
+CMP_GT        V2, V0, V1
+FILTER        V3, V0, V2              ; filtered amounts > 100
+
+; Step 4: Sum filtered amounts
+REDUCE_SUM_F  F1, V3
+HALT_F        F1

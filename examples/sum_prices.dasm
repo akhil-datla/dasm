@@ -1,0 +1,6 @@
+; Sum all amounts from the sales frame
+; Use with: dasm run -example-frames sum_prices.dasm
+LOAD_FRAME    R0, "sales"
+SELECT_COL    V0, R0, "amount"
+REDUCE_SUM_F  F0, V0
+HALT_F        F0

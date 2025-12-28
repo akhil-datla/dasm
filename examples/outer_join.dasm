@@ -1,0 +1,17 @@
+; Demonstrate outer join between orders and customers
+; Outer join includes all records from both frames
+;
+; Uses example frames:
+; - orders: order_id, customer_id, amount
+; - customers: customer_id, name
+
+LOAD_FRAME    R0, "orders"
+LOAD_FRAME    R1, "customers"
+
+; Outer join on customer_id
+JOIN_OUTER    R2, R0, R1, "customer_id"
+
+; Count all records in joined result
+SELECT_COL    V0, R2, "order_id"
+REDUCE_COUNT  R3, V0
+HALT          R3

@@ -1,0 +1,20 @@
+; Demonstrate broadcasting scalar values to vectors
+; Multiplies all amounts by a constant multiplier
+;
+; Uses "sales" example frame with columns: category, amount
+
+LOAD_FRAME    R0, "sales"
+SELECT_COL    V0, R0, "amount"
+
+; Load float constant 1.1 (10% increase)
+LOAD_CONST_F  F0, 1.1
+
+; Broadcast float to match vector length
+BROADCAST_F   V1, F0, V0
+
+; Multiply each amount by 1.1
+VEC_MUL_F     V2, V0, V1
+
+; Sum the increased amounts
+REDUCE_SUM_F  F1, V2
+HALT_F        F1

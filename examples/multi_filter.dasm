@@ -1,0 +1,19 @@
+; Multi-filter example: Filter with multiple conditions
+; Uses predeclared frame "products" with columns: name, price, category, in_stock
+
+LOAD_FRAME    R0, "products"
+SELECT_COL    V0, R0, "price"
+SELECT_COL    V1, R0, "in_stock"
+SELECT_COL    V2, R0, "category"
+
+; Filter: price > 50 AND in_stock = true
+LOAD_CONST_F  F0, 50.0
+BROADCAST_F   V3, F0, V0
+CMP_GT        V4, V0, V3           ; price > 50
+
+AND           V5, V4, V1           ; price > 50 AND in_stock
+
+; Apply filter to get filtered prices
+FILTER        V6, V0, V5
+REDUCE_COUNT  R1, V6               ; Count of matching products
+HALT          R1

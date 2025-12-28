@@ -1,0 +1,11 @@
+; Join example: Join orders with customers
+; Uses predeclared frames "orders" and "customers"
+; orders: order_id, customer_id, amount
+; customers: customer_id, name
+
+LOAD_FRAME    R0, "orders"
+LOAD_FRAME    R1, "customers"
+JOIN_INNER    R2, R0, R1, "customer_id"   ; Join on customer_id
+SELECT_COL    V0, R2, "amount"
+REDUCE_SUM_F  F0, V0                       ; Total order amount
+HALT_F        F0

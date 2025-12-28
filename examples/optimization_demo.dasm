@@ -1,0 +1,24 @@
+; Demonstration of optimization opportunities
+; Compile with -O flag to see dead code elimination
+;
+; dasm compile -O -v optimization_demo.dasm
+;
+; The optimizer will remove:
+; - R2 (value 999, never used)
+; - R3 (value 888, never used)
+; - V1 (category column, not used in final result)
+
+LOAD_FRAME    R0, "sales"
+SELECT_COL    V0, R0, "amount"
+SELECT_COL    V1, R0, "category"    ; Dead: not used in result
+
+LOAD_CONST    R1, 100
+LOAD_CONST    R2, 999               ; Dead: never used
+LOAD_CONST    R3, 888               ; Dead: never used
+
+; Only V0 and R1 are needed for the final computation
+BROADCAST     V2, R1, V0
+CMP_GT        V3, V0, V2
+FILTER        V4, V0, V3
+REDUCE_SUM    R4, V4
+HALT          R4

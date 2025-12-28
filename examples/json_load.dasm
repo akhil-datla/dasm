@@ -1,0 +1,14 @@
+; Load and process data from a JSON file
+; JSON must be an array of objects: [{"col1": val1, ...}, ...]
+;
+; Example JSON:
+; [
+;   {"name": "Alice", "score": 95.5},
+;   {"name": "Bob", "score": 87.0},
+;   {"name": "Charlie", "score": 92.5}
+; ]
+
+LOAD_JSON     R0, "testdata/scores.json"
+SELECT_COL    V0, R0, "score"
+REDUCE_MEAN   F0, V0
+HALT_F        F0
