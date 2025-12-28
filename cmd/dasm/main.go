@@ -25,7 +25,12 @@ import (
 	"github.com/akhildatla/dasm/pkg/vm"
 )
 
-const version = "1.0.0"
+// Version info set by GoReleaser via ldflags
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
 
 func main() {
 	if err := run(); err != nil {
@@ -54,6 +59,12 @@ func run() error {
 		return replCommand(os.Args[2:])
 	case "version":
 		fmt.Printf("dasm version %s\n", version)
+		if commit != "none" {
+			fmt.Printf("  commit: %s\n", commit)
+		}
+		if date != "unknown" {
+			fmt.Printf("  built:  %s\n", date)
+		}
 		return nil
 	case "help", "-h", "--help":
 		return printUsage()

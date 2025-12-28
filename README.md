@@ -16,11 +16,42 @@ A minimalistic, embeddable assembly-like bytecode language for dataframe operati
 
 ## Installation
 
+### Pre-built Binaries
+
+Download the latest release for your platform from [GitHub Releases](https://github.com/akhildatla/dasm/releases):
+
+| Platform | Architecture | Download |
+|----------|--------------|----------|
+| Linux | amd64 | `dasm_VERSION_linux_amd64.tar.gz` |
+| Linux | arm64 | `dasm_VERSION_linux_arm64.tar.gz` |
+| Linux | armv6 | `dasm_VERSION_linux_armv6.tar.gz` |
+| Linux | armv7 | `dasm_VERSION_linux_armv7.tar.gz` |
+| Linux | 386 | `dasm_VERSION_linux_386.tar.gz` |
+| macOS | amd64 (Intel) | `dasm_VERSION_darwin_amd64.tar.gz` |
+| macOS | arm64 (Apple Silicon) | `dasm_VERSION_darwin_arm64.tar.gz` |
+| Windows | amd64 | `dasm_VERSION_windows_amd64.zip` |
+| Windows | arm64 | `dasm_VERSION_windows_arm64.zip` |
+| Windows | 386 | `dasm_VERSION_windows_386.zip` |
+
+Extract and add to your PATH:
+
+```bash
+# Linux/macOS
+tar -xzf dasm_VERSION_OS_ARCH.tar.gz
+sudo mv dasm /usr/local/bin/
+
+# Windows (PowerShell)
+Expand-Archive dasm_VERSION_windows_amd64.zip
+Move-Item dasm.exe C:\Windows\System32\
+```
+
+### Go Install
+
 ```bash
 go install github.com/akhildatla/dasm/cmd/dasm@latest
 ```
 
-Or clone and build:
+### Build from Source
 
 ```bash
 git clone https://github.com/akhildatla/dasm.git
